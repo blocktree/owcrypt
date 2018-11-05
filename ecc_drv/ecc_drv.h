@@ -55,6 +55,7 @@ uint8_ow is_pubkey_legal(ECC_CURVE_PARAM *curveParam, ECC_POINT *point);//1 for 
  @paramter[out]:outpoint_buf pointer to the result((Point)outpoint_buf:=(Point)inputpoint1_buf +[k](Point)inputpoint2_buf)
  */
 uint8_ow point_mul_add(ECC_CURVE_PARAM *curveParam,uint8_ow *inputpoint1_buf,uint8_ow *inputpoint2_buf,uint8_ow *k,uint8_ow *outpoint_buf);
+
 /*
  @function:点的压缩
  @paramter[in]:point_buf,待压缩的点
@@ -67,13 +68,13 @@ uint8_ow point_compress(uint8_ow *point_buf,uint16_ow point_buf_len,uint8_ow *x)
 /*
  @function:点的解压缩：根据曲线参数curveParam和x坐标，求解y坐标(满足曲线方程y^2=x^3+a*x+b)
  @paramter[in]:curveParam,椭圆曲线方程参数
- @paramter[in]:x,曲线上点的横坐标（第一个字节为0x02或0x03.0x02表示y为偶数；0x03表示y为奇数）
- @paramter[in]:x_len表示x的字节长度（一个字节的表示符 + ECC_LEN 字节的私钥）
- @paramter[out]:point_buf,待求解的曲线上的点（含0x04）
+ @paramter[in]:compresspoint,曲线上点的横坐标（第一个字节为0x02或0x03.0x02表示y为偶数；0x03表示y为奇数）
+ @paramter[in]:compresspoint_len表示x的字节长度（一个字节的表示符 + ECC_LEN 字节的私钥）
+ @paramter[out]:decompresspoint,待求解的曲线上的点（含0x04）
  @return:1,表示输入的数据格式错误或者求解y时，平方根不存在;0:表示解压缩成功
  @note：(1)输入的x坐标一定带有标示字节（第一个字节）0x02:表示y为偶数；0x03表示y为奇数.(2)目前支持（p =3(mod4)和p=5(mod8)两种情况）
  */
 
-uint8_ow point_decompress(ECC_CURVE_PARAM *curveParam, uint8_ow *x,uint16_ow x_len,uint8_ow *point_buf);
+uint8_ow point_decompress(ECC_CURVE_PARAM *curveParam, uint8_ow *compresspoint,uint16_ow compresspoint_len,uint8_ow *decompresspoint);
 
 #endif /* ecc_drv_h */

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B5F929F218FF00D00063737 /* blake2b.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B5F929E218FF00D00063737 /* blake2b.c */; };
 		C60129C2218BF5B9009DA8C5 /* bignum.c in Sources */ = {isa = PBXBuildFile; fileRef = C60129BF218BF5B9009DA8C5 /* bignum.c */; };
 		C60129C3218BF5B9009DA8C5 /* bigrand.c in Sources */ = {isa = PBXBuildFile; fileRef = C60129C0218BF5B9009DA8C5 /* bigrand.c */; };
 		C60129C9218BF5E4009DA8C5 /* ecc_set.c in Sources */ = {isa = PBXBuildFile; fileRef = C60129C5218BF5E4009DA8C5 /* ecc_set.c */; };
@@ -39,7 +40,6 @@
 		C6012A1C218BF669009DA8C5 /* owc_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = C6012A17218BF669009DA8C5 /* owc_alloc.c */; };
 		C6012A1D218BF669009DA8C5 /* owc_core.c in Sources */ = {isa = PBXBuildFile; fileRef = C6012A18218BF669009DA8C5 /* owc_core.c */; };
 		C6012A20218BF685009DA8C5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C6012A1F218BF685009DA8C5 /* main.c */; };
-		C6012A22218BF7E7009DA8C5 /* blake2b.c in Sources */ = {isa = PBXBuildFile; fileRef = C6012A21218BF7E7009DA8C5 /* blake2b.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2B5F929E218FF00D00063737 /* blake2b.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = blake2b.c; sourceTree = "<group>"; };
 		C60129B1218BF551009DA8C5 /* owcrypt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = owcrypt; sourceTree = BUILT_PRODUCTS_DIR; };
 		C60129BD218BF5B8009DA8C5 /* bigrand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bigrand.h; sourceTree = "<group>"; };
 		C60129BE218BF5B9009DA8C5 /* bignum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bignum.h; sourceTree = "<group>"; };
@@ -117,7 +118,6 @@
 		C6012A17218BF669009DA8C5 /* owc_alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = owc_alloc.c; sourceTree = "<group>"; };
 		C6012A18218BF669009DA8C5 /* owc_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = owc_core.c; sourceTree = "<group>"; };
 		C6012A1F218BF685009DA8C5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		C6012A21218BF7E7009DA8C5 /* blake2b.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = blake2b.c; path = ../../../OWCrypt/OWCrypt/hash_drv/blake2b.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +197,7 @@
 		C60129DE218BF610009DA8C5 /* hash_drv */ = {
 			isa = PBXGroup;
 			children = (
-				C6012A21218BF7E7009DA8C5 /* blake2b.c */,
+				2B5F929E218FF00D00063737 /* blake2b.c */,
 				C60129FE218BF647009DA8C5 /* blake2b.h */,
 				C60129F4218BF646009DA8C5 /* blake2s.c */,
 				C60129F2218BF646009DA8C5 /* blake2s.h */,
@@ -327,12 +327,12 @@
 				C6012A1C218BF669009DA8C5 /* owc_alloc.c in Sources */,
 				C60129C9218BF5E4009DA8C5 /* ecc_set.c in Sources */,
 				C6012A1A218BF669009DA8C5 /* owc_algorithm.c in Sources */,
+				2B5F929F218FF00D00063737 /* blake2b.c in Sources */,
 				C6012A19218BF669009DA8C5 /* owc_curve.c in Sources */,
 				C6012A06218BF647009DA8C5 /* blake256.c in Sources */,
 				C6012A10218BF647009DA8C5 /* pbkdf2.c in Sources */,
 				C6012A0F218BF647009DA8C5 /* md5.c in Sources */,
 				C6012A0D218BF647009DA8C5 /* sm3.c in Sources */,
-				C6012A22218BF7E7009DA8C5 /* blake2b.c in Sources */,
 				C6012A05218BF647009DA8C5 /* sha256.c in Sources */,
 				C60129DC218BF60C009DA8C5 /* sm2.c in Sources */,
 				C6012A0A218BF647009DA8C5 /* blake2s.c in Sources */,

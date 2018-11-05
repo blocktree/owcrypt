@@ -334,37 +334,49 @@ uint8_ow point_compress(uint8_ow *point_buf,uint16_ow point_buf_len,uint8_ow *x)
     }
     return 1;
 }
+
 /*
  @function:点的解压缩：根据曲线参数curveParam和x坐标，求解y坐标(满足曲线方程y^2=x^3+a*x+b)
  @paramter[in]:curveParam,椭圆曲线方程参数
- @paramter[in]:x,曲线上点的横坐标（第一个字节为0x02或0x03.0x02表示y为偶数；0x03表示y为奇数）
- @paramter[in]:x_len表示x的字节长度（一个字节的表示符 + ECC_LEN 字节的私钥）
- @paramter[out]:point_buf,待求解的曲线上的点（含0x04）
+ @paramter[in]:compresspoint,曲线上点的横坐标（第一个字节为0x02或0x03.0x02表示y为偶数；0x03表示y为奇数）
+ @paramter[in]:compresspoint_len表示x的字节长度（一个字节的表示符 + ECC_LEN 字节的私钥）
+ @paramter[out]:decompresspoint,待求解的曲线上的点（含0x04）
  @return:1,表示输入的数据格式错误或者求解y时，平方根不存在;0:表示解压缩成功
  @note：(1)输入的x坐标一定带有标示字节（第一个字节）0x02:表示y为偶数；0x03表示y为奇数.(2)目前支持（p =3(mod4)和p=5(mod8)两种情况）
  */
-
-uint8_ow point_decompress(ECC_CURVE_PARAM *curveParam, uint8_ow *x,uint16_ow x_len,uint8_ow *point_buf)
+uint8_ow point_decompress(ECC_CURVE_PARAM *curveParam, uint8_ow *compresspoint,uint16_ow compresspoint_len,uint8_ow *decompresspoint)
 {
     uint8_ow *tmp1 = NULL, *tmp2 = NULL,*tmp3=NULL,*tmp4=NULL;
+    ECC_POINT *point=NULL;
     tmp1 = calloc(ECC_LEN, sizeof(uint8_ow));
     tmp2 = calloc(ECC_LEN, sizeof(uint8_ow));
     tmp3 = calloc(ECC_LEN, sizeof(uint8_ow));
     tmp4 = calloc(ECC_LEN, sizeof(uint8_ow));
-    if(x_len != (ECC_LEN + 1))
+    point=calloc(1,sizeof(ECC_POINT));
+    if(compresspoint_len != (ECC_LEN + 1))
     {
+        free(point);
+        free(tmp1);
+        free(tmp2);
+        free(tmp3);
+        free(tmp4);
         return 0;
     }
-    if((x[0] != 0x02)&&(x[0] != 0x03))
+    if((compresspoint[0] != 0x02)&&(compresspoint[0] != 0x03))
     {
+        free(point);
+        free(tmp1);
+        free(tmp2);
+        free(tmp3);
+        free(tmp4);
         return 0;
     }
     //求解tmp1 = x^2
-    bignum_mod_mul(x+1, x+1, curveParam -> p, tmp1);
+    bignum_mod_mul(compresspoint+1, compresspoint+1, curveParam -> p, tmp1);
     //求解tmp2 = x^3
-    bignum_mod_mul(x+1, tmp1, curveParam -> p, tmp2);
+    bignum_mod_mul(compresspoint+1, tmp1, curveParam -> p, tmp2);
     //求解 tmp1 = a*x (mod q)
-    bignum_mod_mul(curveParam -> a, x + 1, curveParam -> p, tmp1);
+    bignum_mod_mul(curveParam -> a, compresspoint + 1, curveParam -> p, tmp1);
     //求解 tmp1 = x^3 + a*x
     bignum_mod_add(tmp1, tmp2, curveParam -> p, tmp1);
     //求解 tmp1 = x^3 + a*x +b
@@ -391,27 +403,27 @@ uint8_ow point_decompress(ECC_CURVE_PARAM *curveParam, uint8_ow *x,uint16_ow x_l
         //check whether tmp1 is equal to tmp3.if it is,tmp3 is the result we need;otherwise,there is no square root.
         if(bignum_cmp(tmp1, ECC_LEN,tmp3,ECC_LEN)==0)
         {
-            if(x[0]==0x02)
+            if(compresspoint[0]==0x02)
             {
                 if(tmp2[ECC_LEN-1]&0x01)
                 {
-                    bignum_sub(curveParam->p, tmp2, ECC_LEN, point_buf + ECC_LEN + 1);
+                    bignum_sub(curveParam->p, tmp2, ECC_LEN, decompresspoint + ECC_LEN + 1);
                 }
                 else
                 {
-                    memcpy(point_buf + ECC_LEN + 1,tmp2,ECC_LEN);
+                    memcpy(decompresspoint + ECC_LEN + 1,tmp2,ECC_LEN);
                     
                 }
             }
-           else if(x[0]==0x03)
+           else if(compresspoint[0]==0x03)
             {
                 if(tmp2[ECC_LEN-1]&0x01)
                 {
-                  memcpy(point_buf + ECC_LEN + 1,tmp2,ECC_LEN);
+                  memcpy(decompresspoint + ECC_LEN + 1,tmp2,ECC_LEN);
                 }
                 else
                 {
-                    bignum_sub(curveParam->p, tmp2, ECC_LEN, point_buf + ECC_LEN + 1);
+                    bignum_sub(curveParam->p, tmp2, ECC_LEN, decompresspoint + ECC_LEN + 1);
                 }
             }
             else
@@ -421,6 +433,11 @@ uint8_ow point_decompress(ECC_CURVE_PARAM *curveParam, uint8_ow *x,uint16_ow x_l
         }
         else
         {
+            free(point);
+            free(tmp1);
+            free(tmp2);
+            free(tmp3);
+            free(tmp4);
             return 0;
         }
     }
@@ -452,30 +469,35 @@ uint8_ow point_decompress(ECC_CURVE_PARAM *curveParam, uint8_ow *x,uint16_ow x_l
             tmp2[ECC_LEN-1]=0x01;
             bignum_add(tmp4, tmp2, ECC_LEN, tmp4);
             bignum_mod_exp(tmp1, tmp4, curveParam->p, tmp2);
-            if(x[0]==0x02)
+            if(compresspoint[0]==0x02)
             {
                 if(tmp2[ECC_LEN-1]&0x01)
                 {
-                    bignum_sub(curveParam->p, tmp2, ECC_LEN, point_buf + ECC_LEN + 1);
+                    bignum_sub(curveParam->p, tmp2, ECC_LEN, decompresspoint + ECC_LEN + 1);
                 }
                 else
                 {
-                    memcpy(point_buf + ECC_LEN + 1,tmp2,ECC_LEN);
+                    memcpy(decompresspoint + ECC_LEN + 1,tmp2,ECC_LEN);
                 }
             }
-            else if(x[0]==0x03)
+            else if(compresspoint[0]==0x03)
             {
                 if(tmp2[ECC_LEN-1]&0x01)
                 {
-                    memcpy(point_buf + ECC_LEN + 1,tmp2,ECC_LEN);
+                    memcpy(decompresspoint + ECC_LEN + 1,tmp2,ECC_LEN);
                 }
                 else
                 {
-                    bignum_sub(curveParam->p, tmp2, ECC_LEN, point_buf + ECC_LEN + 1);
+                    bignum_sub(curveParam->p, tmp2, ECC_LEN, decompresspoint + ECC_LEN + 1);
                 }
             }
             else
             {
+                free(point);
+                free(tmp1);
+                free(tmp2);
+                free(tmp3);
+                free(tmp4);
                 return 0;
             }
         }
@@ -492,26 +514,26 @@ uint8_ow point_decompress(ECC_CURVE_PARAM *curveParam, uint8_ow *x,uint16_ow x_l
                 tmp3[ECC_LEN] = 0x02;
                 bignum_mod_mul(tmp1,tmp3,curveParam ->p, tmp4);
                 bignum_mod_mul(tmp4,tmp2,curveParam ->p, tmp3);
-                if(x[0]==0x02)
+                if(compresspoint[0]==0x02)
                 {
                     if(tmp3[ECC_LEN-1]&0x01)
                     {
-                       bignum_sub(curveParam->p, tmp3, ECC_LEN, point_buf + ECC_LEN + 1);
+                       bignum_sub(curveParam->p, tmp3, ECC_LEN, decompresspoint + ECC_LEN + 1);
                     }
                     else
                     {
-                        memcpy(point_buf + ECC_LEN + 1,tmp3,ECC_LEN);
+                        memcpy(decompresspoint + ECC_LEN + 1,tmp3,ECC_LEN);
                     }
                 }
-                else if(x[0]==0x03)
+                else if(compresspoint[0]==0x03)
                 {
                     if(tmp3[ECC_LEN-1]&0x01)
                     {
-                        memcpy(point_buf + ECC_LEN + 1,tmp3,ECC_LEN);
+                        memcpy(decompresspoint + ECC_LEN + 1,tmp3,ECC_LEN);
                     }
                     else
                     {
-                        bignum_sub(curveParam->p, tmp3, ECC_LEN, point_buf + ECC_LEN + 1);
+                        bignum_sub(curveParam->p, tmp3, ECC_LEN, decompresspoint + ECC_LEN + 1);
                     }
                 }
             }
@@ -528,10 +550,27 @@ uint8_ow point_decompress(ECC_CURVE_PARAM *curveParam, uint8_ow *x,uint16_ow x_l
     }
     else
     {
+        free(point);
+        free(tmp1);
+        free(tmp2);
+        free(tmp3);
+        free(tmp4);
         return 0;
     }
-    point_buf[0]=0x04;
-    memcpy(point_buf + 1,x+1,ECC_LEN);
+    decompresspoint[0]=0x04;
+    memcpy(decompresspoint + 1,compresspoint+1,ECC_LEN);
+    memcpy(point->x,decompresspoint+1,32);
+    memcpy(point->y,decompresspoint+33,32);
+    if(!is_pubkey_legal(curveParam, point))
+    {
+        free(point);
+        free(tmp1);
+        free(tmp2);
+        free(tmp3);
+        free(tmp4);
+        return 0;
+    }
+    free(point);
     free(tmp1);
     free(tmp2);
     free(tmp3);
