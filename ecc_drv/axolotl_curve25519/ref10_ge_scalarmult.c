@@ -2,7 +2,7 @@
 #include "ref10_ge.h"
 #include "ref10_crypto_additions.h"
 
-static unsigned char REF10_equal(signed char b,signed char c)
+static unsigned char REF10_ge_scalarmult_base_equal(signed char b,signed char c)
 {
   unsigned char ub = b;
   unsigned char uc = c;
@@ -13,14 +13,14 @@ static unsigned char REF10_equal(signed char b,signed char c)
   return y;
 }
 
-static unsigned char REF10_negative(signed char b)
+static unsigned char REF10_ge_scalarnult_negative(signed char b)
 {
   unsigned long long x = b; /* 18446744073709551361..18446744073709551615: yes; 0..255: no */
   x >>= 63; /* 1: yes; 0: no */
   return x;
 }
 
-static void REF10_cmov(REF10_ge_cached *t,const REF10_ge_cached *u,unsigned char b)
+static void REF10_ge_scalarnult_cmov(REF10_ge_cached *t,const REF10_ge_cached *u,unsigned char b)
 {
   REF10_fe_cmov(t->YplusX,u->YplusX,b);
   REF10_fe_cmov(t->YminusX,u->YminusX,b);
@@ -28,10 +28,10 @@ static void REF10_cmov(REF10_ge_cached *t,const REF10_ge_cached *u,unsigned char
   REF10_fe_cmov(t->T2d,u->T2d,b);
 }
 
-static void REF10_select(REF10_ge_cached *t,const REF10_ge_cached *pre, signed char b)
+static void REF10_ge_scalarnult_select(REF10_ge_cached *t,const REF10_ge_cached *pre, signed char b)
 {
   REF10_ge_cached minust;
-  unsigned char bnegative = REF10_negative(b);
+  unsigned char bnegative = REF10_ge_scalarnult_negative(b);
   unsigned char babs = b - (((-bnegative) & b) << 1);
 
   REF10_fe_1(t->YplusX);
@@ -39,19 +39,19 @@ static void REF10_select(REF10_ge_cached *t,const REF10_ge_cached *pre, signed c
   REF10_fe_1(t->Z);
   REF10_fe_0(t->T2d);
 
-  REF10_cmov(t,pre+0,REF10_equal(babs,1));
-  REF10_cmov(t,pre+1,REF10_equal(babs,2));
-  REF10_cmov(t,pre+2,REF10_equal(babs,3));
-  REF10_cmov(t,pre+3,REF10_equal(babs,4));
-  REF10_cmov(t,pre+4,REF10_equal(babs,5));
-  REF10_cmov(t,pre+5,REF10_equal(babs,6));
-  REF10_cmov(t,pre+6,REF10_equal(babs,7));
-  REF10_cmov(t,pre+7,REF10_equal(babs,8));
+  REF10_ge_scalarnult_cmov(t,pre+0,REF10_ge_scalarmult_base_equal(babs,1));
+  REF10_ge_scalarnult_cmov(t,pre+1,REF10_ge_scalarmult_base_equal(babs,2));
+  REF10_ge_scalarnult_cmov(t,pre+2,REF10_ge_scalarmult_base_equal(babs,3));
+  REF10_ge_scalarnult_cmov(t,pre+3,REF10_ge_scalarmult_base_equal(babs,4));
+  REF10_ge_scalarnult_cmov(t,pre+4,REF10_ge_scalarmult_base_equal(babs,5));
+  REF10_ge_scalarnult_cmov(t,pre+5,REF10_ge_scalarmult_base_equal(babs,6));
+  REF10_ge_scalarnult_cmov(t,pre+6,REF10_ge_scalarmult_base_equal(babs,7));
+  REF10_ge_scalarnult_cmov(t,pre+7,REF10_ge_scalarmult_base_equal(babs,8));
   REF10_fe_copy(minust.YplusX,t->YminusX);
   REF10_fe_copy(minust.YminusX,t->YplusX);
   REF10_fe_copy(minust.Z,t->Z);
   REF10_fe_neg(minust.T2d,t->T2d);
-  REF10_cmov(t,&minust,bnegative);
+  REF10_ge_scalarnult_cmov(t,&minust,bnegative);
 }
 
 /*
@@ -124,7 +124,7 @@ void REF10_ge_scalarmult(REF10_ge_p3 *h, const unsigned char *a, const REF10_ge_
   REF10_ge_p3_0(h);
 
   for (i = 63;i > 0; i--) {
-    REF10_select(&t,pre,e[i]);
+    REF10_ge_scalarnult_select(&t,pre,e[i]);
     REF10_ge_add(&r, h, &t);
     REF10_ge_p1p1_to_p2(&s,&r);
 
@@ -134,7 +134,7 @@ void REF10_ge_scalarmult(REF10_ge_p3 *h, const unsigned char *a, const REF10_ge_
     REF10_ge_p2_dbl(&r,&s); REF10_ge_p1p1_to_p3(h,&r);
 
   }
-  REF10_select(&t,pre,e[0]);
+  REF10_ge_scalarnult_select(&t,pre,e[0]);
   REF10_ge_add(&r, h, &t);
   REF10_ge_p1p1_to_p3(h,&r);
 }
