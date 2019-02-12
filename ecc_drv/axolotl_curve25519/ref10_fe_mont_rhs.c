@@ -1,6 +1,6 @@
 #include "ref10_fe.h"
 
-void REF10_fe_mont_rhs(REF10_fe v2, REF10_fe u) {
+void REF10_fe_mont_rhs(REF10_fe v2, const REF10_fe u) {
   REF10_fe A, one;
   REF10_fe u2, Au, inner;
 
