@@ -32,6 +32,7 @@
 #define  ECC_CURVE_SM2_STANDARD     0xECC00002
 #define  ECC_CURVE_ED25519          0xECC00003
 #define  ECC_CURVE_ED25519_EXTEND   0xECC00004
+#define  ECC_CURVE_ED25519_REF10    0xECC00005
 
 #define SUCCESS              0x0001
 #define FAILURE              0x0000

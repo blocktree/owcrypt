@@ -18,6 +18,9 @@
 #include "secp256r1.h"
 #include "sm2.h"
 #include "ED25519.h"
+#include "REF10_ge.h"
+#include "ref10_keygen.h"
+#include "ref10_crypto_sign.h"
 
 static uint8_ow randNum[32]={0};
 uint16_ow ECC_preprocess_randomnum(uint8_ow *rand)
@@ -53,6 +56,12 @@ uint16_ow ECC_genPubkey(uint8_ow *prikey, uint8_ow *pubkey, uint32_ow type)
         case ECC_CURVE_ED25519:
         {
             ED25519_genPubkey(prikey, pubkey);
+            ret = SUCCESS;
+        }
+            break;
+        case ECC_CURVE_ED25519_REF10:
+        {
+            REF10_curve25519_keygen(pubkey, prikey);
             ret = SUCCESS;
         }
             break;
@@ -192,6 +201,30 @@ uint16_ow ECC_sign(uint8_ow *prikey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *me
             ED25519_Sign(prikey, message, message_len, sig, ECC_CURVE_ED25519_EXTEND);
             ret = SUCCESS;
         }
+        case ECC_CURVE_ED25519_REF10:
+        {
+            /*int REF10_curve25519_sign(unsigned char* signature_out,
+             const unsigned char* curve25519_privkey,
+             const unsigned char* msg, const unsigned long msg_len,
+             const unsigned char* random)*/
+            SHA512_CTX sha512;
+            uint32_ow hashTime = (uint32_ow)time(NULL);
+            uint8_ow *random = NULL;
+            random = calloc(1, 64);
+            sha512_init(&sha512);
+            sha512_update(&sha512, (uint8_ow*)&hashTime, 4);
+            sha512_update(&sha512, prikey, 32);
+            sha512_update(&sha512, message, message_len);
+            sha512_final(&sha512, random);
+            if(0 != REF10_curve25519_sign(sig, prikey, message, message_len, random))
+            {
+                free(random);
+                ret = FAILURE;
+            }else{
+                free(random);
+                ret = SUCCESS;
+            }
+        }
             break;
         default:
         {
@@ -258,6 +291,21 @@ uint16_ow ECC_verify(uint8_ow *pubkey, uint8_ow *ID, uint16_ow IDlen, uint8_ow *
         case ECC_CURVE_ED25519:
         {
             ret = ED25519_Verify(pubkey, message, message_len, sig);
+        }
+            break;
+        case ECC_CURVE_ED25519_REF10:
+        {
+            /*
+             int REF10_curve25519_verify(const unsigned char* signature,
+             const unsigned char* curve25519_pubkey,
+             const unsigned char* msg, const unsigned long msg_len)
+             */
+            if(0 != REF10_curve25519_verify(sig, pubkey, message, message_len))
+            {
+                ret = FAILURE;
+            }else{
+                ret = SUCCESS;
+            }
         }
             break;
         default:
@@ -519,6 +567,9 @@ uint16_ow ECC_point_mul_baseG(uint8_ow *scalar, uint8_ow *point, uint32_ow type)
             ED25519_point_mul_base(scalar, point);
             return SUCCESS;
             break;
+        case ECC_CURVE_ED25519_REF10:
+            REF10_curve25519_keygen(point, scalar);
+            return SUCCESS;
         default:
             return ECC_WRONG_TYPE;
             break;
