@@ -1,14 +1,13 @@
 #include "ref10_ge.h"
-#include "ref10_sqrtm1.h"
 
 static const REF10_fe REF10_d = {
     -10913610,13857413,-15372611,6949391,114729,-8787816,-6275908,-3247719,-18696448,-12055116
 };
 
 
-//static const REF10_fe sqrtm1 = {
-//#include "ref10_sqrtm1.h"
-//} ;
+static const REF10_fe REF10_sqrtm1 = {
+    -32595792,-7943725,9377950,3500415,12389472,-272473,-25146209,-2005654,326686,11406482
+};
 
 int REF10_ge_frombytes_negate_vartime(REF10_ge_p3 *h,const unsigned char *s)
 {

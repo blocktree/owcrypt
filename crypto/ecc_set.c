@@ -20,7 +20,7 @@
 #include "ED25519.h"
 #include "ref10_ge.h"
 #include "ref10_keygen.h"
-#include "ref10_crypto_sign.h"
+#include "ref10_curve_sigs.h"
 
 static uint8_ow randNum[32]={0};
 uint16_ow ECC_preprocess_randomnum(uint8_ow *rand)
