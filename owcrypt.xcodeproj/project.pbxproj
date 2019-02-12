@@ -189,7 +189,6 @@
 		C6012A1F218BF685009DA8C5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		C6753A2122129D47005E2A31 /* ref10_ge_madd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_ge_madd.c; sourceTree = "<group>"; };
 		C6753A2222129D47005E2A31 /* ref10_crypto_uint32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_crypto_uint32.h; sourceTree = "<group>"; };
-		C6753A2322129D47005E2A31 /* ref10_base2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_base2.h; sourceTree = "<group>"; };
 		C6753A2422129D47005E2A31 /* ref10_gen_crypto_additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_gen_crypto_additions.h; sourceTree = "<group>"; };
 		C6753A2522129D47005E2A31 /* ref10_fe_frombytes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_fe_frombytes.c; sourceTree = "<group>"; };
 		C6753A2622129D48005E2A31 /* ref10_crypto_sign_edwards25519sha512batch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_crypto_sign_edwards25519sha512batch.h; sourceTree = "<group>"; };
@@ -202,9 +201,7 @@
 		C6753A2E22129D48005E2A31 /* ref10_gen_x.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_gen_x.c; sourceTree = "<group>"; };
 		C6753A2F22129D48005E2A31 /* ref10_crypto_uint64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_crypto_uint64.h; sourceTree = "<group>"; };
 		C6753A3122129D48005E2A31 /* ref10_ge_p3_dbl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_ge_p3_dbl.c; sourceTree = "<group>"; };
-		C6753A3222129D49005E2A31 /* ref10_d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_d.h; sourceTree = "<group>"; };
 		C6753A3322129D49005E2A31 /* ref10_fe_tobytes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_fe_tobytes.c; sourceTree = "<group>"; };
-		C6753A3622129D49005E2A31 /* ref10_d2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_d2.h; sourceTree = "<group>"; };
 		C6753A3722129D49005E2A31 /* ref10_hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_hash.c; sourceTree = "<group>"; };
 		C6753A3822129D49005E2A31 /* ref10_ge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_ge.h; sourceTree = "<group>"; };
 		C6753A3922129D4A005E2A31 /* ref10_ge_p2_dbl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_ge_p2_dbl.c; sourceTree = "<group>"; };
@@ -241,7 +238,6 @@
 		C6753A5922129D4E005E2A31 /* ref10_open_modified.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_open_modified.c; sourceTree = "<group>"; };
 		C6753A5A22129D4E005E2A31 /* ref10_curve_sigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_curve_sigs.h; sourceTree = "<group>"; };
 		C6753A5B22129D4E005E2A31 /* ref10_ge_add.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_ge_add.c; sourceTree = "<group>"; };
-		C6753A5C22129D4E005E2A31 /* ref10_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_base.h; sourceTree = "<group>"; };
 		C6753A5D22129D4E005E2A31 /* ref10_ge_scalarmult_cofactor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ref10_ge_scalarmult_cofactor.c; sourceTree = "<group>"; };
 		C6753A5E22129D4E005E2A31 /* ref10_crypto_int32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_crypto_int32.h; sourceTree = "<group>"; };
 		C6753A5F22129D4E005E2A31 /* ref10_compare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref10_compare.h; sourceTree = "<group>"; };
@@ -426,8 +422,6 @@
 		C6753A2022129CF2005E2A31 /* axolotl_curve25519 */ = {
 			isa = PBXGroup;
 			children = (
-				C6753A5C22129D4E005E2A31 /* ref10_base.h */,
-				C6753A2322129D47005E2A31 /* ref10_base2.h */,
 				C6753A3C22129D4A005E2A31 /* ref10_blocks.c */,
 				C6753A5122129D4D005E2A31 /* ref10_compare.c */,
 				C6753A5F22129D4E005E2A31 /* ref10_compare.h */,
@@ -442,8 +436,6 @@
 				C6753A7F22129D52005E2A31 /* ref10_crypto_verify_32.h */,
 				C6753A5022129D4D005E2A31 /* ref10_curve_sigs.c */,
 				C6753A5A22129D4E005E2A31 /* ref10_curve_sigs.h */,
-				C6753A3222129D49005E2A31 /* ref10_d.h */,
-				C6753A3622129D49005E2A31 /* ref10_d2.h */,
 				C6753A4122129D4B005E2A31 /* ref10_elligator.c */,
 				C6753A6422129D4F005E2A31 /* ref10_fe_0.c */,
 				C6753A8822129D53005E2A31 /* ref10_fe_1.c */,

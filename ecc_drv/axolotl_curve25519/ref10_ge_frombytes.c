@@ -1,10 +1,10 @@
 #include "ref10_ge.h"
-#include "ref10_d.h"
 #include "ref10_sqrtm1.h"
 
-//static const REF10_fe d = {
-//#include "ref10_d.h"
-//} ;
+static const REF10_fe REF10_d = {
+    -10913610,13857413,-15372611,6949391,114729,-8787816,-6275908,-3247719,-18696448,-12055116
+};
+
 
 //static const REF10_fe sqrtm1 = {
 //#include "ref10_sqrtm1.h"

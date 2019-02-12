@@ -1,12 +1,12 @@
 #include "ref10_ge.h"
-#include "ref10_d2.h"
 /*
 r = p
 */
 
-//static const REF10_fe d2 = {
-//#include "ref10_d2.h"
-//} ;
+static const REF10_fe REF10_d2 = {
+    -21827239,-5839606,-30745221,13898782,229458,15978800,-12551817,-6495438,29715968,9444199
+};
+
 
 extern void REF10_ge_p3_to_cached(REF10_ge_cached *r,const REF10_ge_p3 *p)
 {
