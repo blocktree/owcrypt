@@ -2,7 +2,7 @@
 #include "ref10_crypto_int64.h"
 #include "ref10_crypto_uint64.h"
 
-static REF10_crypto_uint64 REF10_load_3(const unsigned char *in)
+static REF10_crypto_uint64 REF10_fe_fromebytes_load_3(const unsigned char *in)
 {
   REF10_crypto_uint64 result;
   result = (REF10_crypto_uint64) in[0];
@@ -11,7 +11,7 @@ static REF10_crypto_uint64 REF10_load_3(const unsigned char *in)
   return result;
 }
 
-static REF10_crypto_uint64 REF10_load_4(const unsigned char *in)
+static REF10_crypto_uint64 REF10_fe_fromebytes_load_4(const unsigned char *in)
 {
   REF10_crypto_uint64 result;
   result = (REF10_crypto_uint64) in[0];
@@ -27,16 +27,16 @@ Ignores top bit of h.
 
 void REF10_fe_frombytes(REF10_fe h,const unsigned char *s)
 {
-  REF10_crypto_int64 h0 = REF10_load_4(s);
-  REF10_crypto_int64 h1 = REF10_load_3(s + 4) << 6;
-  REF10_crypto_int64 h2 = REF10_load_3(s + 7) << 5;
-  REF10_crypto_int64 h3 = REF10_load_3(s + 10) << 3;
-  REF10_crypto_int64 h4 = REF10_load_3(s + 13) << 2;
-  REF10_crypto_int64 h5 = REF10_load_4(s + 16);
-  REF10_crypto_int64 h6 = REF10_load_3(s + 20) << 7;
-  REF10_crypto_int64 h7 = REF10_load_3(s + 23) << 5;
-  REF10_crypto_int64 h8 = REF10_load_3(s + 26) << 4;
-  REF10_crypto_int64 h9 = (REF10_load_3(s + 29) & 8388607) << 2;
+  REF10_crypto_int64 h0 = REF10_fe_fromebytes_load_4(s);
+  REF10_crypto_int64 h1 = REF10_fe_fromebytes_load_3(s + 4) << 6;
+  REF10_crypto_int64 h2 = REF10_fe_fromebytes_load_3(s + 7) << 5;
+  REF10_crypto_int64 h3 = REF10_fe_fromebytes_load_3(s + 10) << 3;
+  REF10_crypto_int64 h4 = REF10_fe_fromebytes_load_3(s + 13) << 2;
+  REF10_crypto_int64 h5 = REF10_fe_fromebytes_load_4(s + 16);
+  REF10_crypto_int64 h6 = REF10_fe_fromebytes_load_3(s + 20) << 7;
+  REF10_crypto_int64 h7 = REF10_fe_fromebytes_load_3(s + 23) << 5;
+  REF10_crypto_int64 h8 = REF10_fe_fromebytes_load_3(s + 26) << 4;
+  REF10_crypto_int64 h9 = (REF10_fe_fromebytes_load_3(s + 29) & 8388607) << 2;
   REF10_crypto_int64 carry0;
   REF10_crypto_int64 carry1;
   REF10_crypto_int64 carry2;

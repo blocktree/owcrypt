@@ -3,7 +3,7 @@
 #include "ref10_crypto_uint32.h"
 #include "ref10_crypto_uint64.h"
 
-static REF10_crypto_uint64 REF10_load_3(const unsigned char *in)
+static REF10_crypto_uint64 REF10_sc_reduce_load_3(const unsigned char *in)
 {
   REF10_crypto_uint64 result;
   result = (REF10_crypto_uint64) in[0];
@@ -12,7 +12,7 @@ static REF10_crypto_uint64 REF10_load_3(const unsigned char *in)
   return result;
 }
 
-static REF10_crypto_uint64 REF10_load_4(const unsigned char *in)
+static REF10_crypto_uint64 REF10_sc_reduce_load_4(const unsigned char *in)
 {
   REF10_crypto_uint64 result;
   result = (REF10_crypto_uint64) in[0];
@@ -34,30 +34,30 @@ Output:
 
 void REF10_sc_reduce(unsigned char *s)
 {
-  REF10_crypto_int64 s0 = 2097151 & REF10_load_3(s);
-  REF10_crypto_int64 s1 = 2097151 & (REF10_load_4(s + 2) >> 5);
-  REF10_crypto_int64 s2 = 2097151 & (REF10_load_3(s + 5) >> 2);
-  REF10_crypto_int64 s3 = 2097151 & (REF10_load_4(s + 7) >> 7);
-  REF10_crypto_int64 s4 = 2097151 & (REF10_load_4(s + 10) >> 4);
-  REF10_crypto_int64 s5 = 2097151 & (REF10_load_3(s + 13) >> 1);
-  REF10_crypto_int64 s6 = 2097151 & (REF10_load_4(s + 15) >> 6);
-  REF10_crypto_int64 s7 = 2097151 & (REF10_load_3(s + 18) >> 3);
-  REF10_crypto_int64 s8 = 2097151 & REF10_load_3(s + 21);
-  REF10_crypto_int64 s9 = 2097151 & (REF10_load_4(s + 23) >> 5);
-  REF10_crypto_int64 s10 = 2097151 & (REF10_load_3(s + 26) >> 2);
-  REF10_crypto_int64 s11 = 2097151 & (REF10_load_4(s + 28) >> 7);
-  REF10_crypto_int64 s12 = 2097151 & (REF10_load_4(s + 31) >> 4);
-  REF10_crypto_int64 s13 = 2097151 & (REF10_load_3(s + 34) >> 1);
-  REF10_crypto_int64 s14 = 2097151 & (REF10_load_4(s + 36) >> 6);
-  REF10_crypto_int64 s15 = 2097151 & (REF10_load_3(s + 39) >> 3);
-  REF10_crypto_int64 s16 = 2097151 & REF10_load_3(s + 42);
-  REF10_crypto_int64 s17 = 2097151 & (REF10_load_4(s + 44) >> 5);
-  REF10_crypto_int64 s18 = 2097151 & (REF10_load_3(s + 47) >> 2);
-  REF10_crypto_int64 s19 = 2097151 & (REF10_load_4(s + 49) >> 7);
-  REF10_crypto_int64 s20 = 2097151 & (REF10_load_4(s + 52) >> 4);
-  REF10_crypto_int64 s21 = 2097151 & (REF10_load_3(s + 55) >> 1);
-  REF10_crypto_int64 s22 = 2097151 & (REF10_load_4(s + 57) >> 6);
-  REF10_crypto_int64 s23 = (REF10_load_4(s + 60) >> 3);
+  REF10_crypto_int64 s0 = 2097151 & REF10_sc_reduce_load_3(s);
+  REF10_crypto_int64 s1 = 2097151 & (REF10_sc_reduce_load_4(s + 2) >> 5);
+  REF10_crypto_int64 s2 = 2097151 & (REF10_sc_reduce_load_3(s + 5) >> 2);
+  REF10_crypto_int64 s3 = 2097151 & (REF10_sc_reduce_load_4(s + 7) >> 7);
+  REF10_crypto_int64 s4 = 2097151 & (REF10_sc_reduce_load_4(s + 10) >> 4);
+  REF10_crypto_int64 s5 = 2097151 & (REF10_sc_reduce_load_3(s + 13) >> 1);
+  REF10_crypto_int64 s6 = 2097151 & (REF10_sc_reduce_load_4(s + 15) >> 6);
+  REF10_crypto_int64 s7 = 2097151 & (REF10_sc_reduce_load_3(s + 18) >> 3);
+  REF10_crypto_int64 s8 = 2097151 & REF10_sc_reduce_load_3(s + 21);
+  REF10_crypto_int64 s9 = 2097151 & (REF10_sc_reduce_load_4(s + 23) >> 5);
+  REF10_crypto_int64 s10 = 2097151 & (REF10_sc_reduce_load_3(s + 26) >> 2);
+  REF10_crypto_int64 s11 = 2097151 & (REF10_sc_reduce_load_4(s + 28) >> 7);
+  REF10_crypto_int64 s12 = 2097151 & (REF10_sc_reduce_load_4(s + 31) >> 4);
+  REF10_crypto_int64 s13 = 2097151 & (REF10_sc_reduce_load_3(s + 34) >> 1);
+  REF10_crypto_int64 s14 = 2097151 & (REF10_sc_reduce_load_4(s + 36) >> 6);
+  REF10_crypto_int64 s15 = 2097151 & (REF10_sc_reduce_load_3(s + 39) >> 3);
+  REF10_crypto_int64 s16 = 2097151 & REF10_sc_reduce_load_3(s + 42);
+  REF10_crypto_int64 s17 = 2097151 & (REF10_sc_reduce_load_4(s + 44) >> 5);
+  REF10_crypto_int64 s18 = 2097151 & (REF10_sc_reduce_load_3(s + 47) >> 2);
+  REF10_crypto_int64 s19 = 2097151 & (REF10_sc_reduce_load_4(s + 49) >> 7);
+  REF10_crypto_int64 s20 = 2097151 & (REF10_sc_reduce_load_4(s + 52) >> 4);
+  REF10_crypto_int64 s21 = 2097151 & (REF10_sc_reduce_load_3(s + 55) >> 1);
+  REF10_crypto_int64 s22 = 2097151 & (REF10_sc_reduce_load_4(s + 57) >> 6);
+  REF10_crypto_int64 s23 = (REF10_sc_reduce_load_4(s + 60) >> 3);
   REF10_crypto_int64 carry0;
   REF10_crypto_int64 carry1;
   REF10_crypto_int64 carry2;

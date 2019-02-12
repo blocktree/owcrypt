@@ -1,21 +1,22 @@
 #include <stdint.h>
-typedef uint64_t uint64;
+#include "type.h"
+typedef uint64_ow REF10_uint64;
 
-static uint64 REF10_load_bigendian(const unsigned char *x)
+static REF10_uint64 REF10_load_bigendian(const unsigned char *x)
 {
   return
-      (uint64) (x[7]) \
-  | (((uint64) (x[6])) << 8) \
-  | (((uint64) (x[5])) << 16) \
-  | (((uint64) (x[4])) << 24) \
-  | (((uint64) (x[3])) << 32) \
-  | (((uint64) (x[2])) << 40) \
-  | (((uint64) (x[1])) << 48) \
-  | (((uint64) (x[0])) << 56)
+      (REF10_uint64) (x[7]) \
+  | (((REF10_uint64) (x[6])) << 8) \
+  | (((REF10_uint64) (x[5])) << 16) \
+  | (((REF10_uint64) (x[4])) << 24) \
+  | (((REF10_uint64) (x[3])) << 32) \
+  | (((REF10_uint64) (x[2])) << 40) \
+  | (((REF10_uint64) (x[1])) << 48) \
+  | (((REF10_uint64) (x[0])) << 56)
   ;
 }
 
-static void REF10_store_bigendian(unsigned char *x,uint64 u)
+static void REF10_store_bigendian(unsigned char *x,REF10_uint64 u)
 {
   x[7] = u; u >>= 8;
   x[6] = u; u >>= 8;
@@ -71,17 +72,17 @@ static void REF10_store_bigendian(unsigned char *x,uint64 u)
 
 int REF10_crypto_hashblocks_sha512(unsigned char *statebytes,const unsigned char *in,unsigned long long inlen)
 {
-  uint64 state[8];
-  uint64 a;
-  uint64 b;
-  uint64 c;
-  uint64 d;
-  uint64 e;
-  uint64 f;
-  uint64 g;
-  uint64 h;
-  uint64 T1;
-  uint64 T2;
+  REF10_uint64 state[8];
+  REF10_uint64 a;
+  REF10_uint64 b;
+  REF10_uint64 c;
+  REF10_uint64 d;
+  REF10_uint64 e;
+  REF10_uint64 f;
+  REF10_uint64 g;
+  REF10_uint64 h;
+  REF10_uint64 T1;
+  REF10_uint64 T2;
 
   a = REF10_load_bigendian(statebytes +  0); state[0] = a;
   b = REF10_load_bigendian(statebytes +  8); state[1] = b;
@@ -93,22 +94,22 @@ int REF10_crypto_hashblocks_sha512(unsigned char *statebytes,const unsigned char
   h = REF10_load_bigendian(statebytes + 56); state[7] = h;
 
   while (inlen >= 128) {
-    uint64 w0  = REF10_load_bigendian(in +   0);
-    uint64 w1  = REF10_load_bigendian(in +   8);
-    uint64 w2  = REF10_load_bigendian(in +  16);
-    uint64 w3  = REF10_load_bigendian(in +  24);
-    uint64 w4  = REF10_load_bigendian(in +  32);
-    uint64 w5  = REF10_load_bigendian(in +  40);
-    uint64 w6  = REF10_load_bigendian(in +  48);
-    uint64 w7  = REF10_load_bigendian(in +  56);
-    uint64 w8  = REF10_load_bigendian(in +  64);
-    uint64 w9  = REF10_load_bigendian(in +  72);
-    uint64 w10 = REF10_load_bigendian(in +  80);
-    uint64 w11 = REF10_load_bigendian(in +  88);
-    uint64 w12 = REF10_load_bigendian(in +  96);
-    uint64 w13 = REF10_load_bigendian(in + 104);
-    uint64 w14 = REF10_load_bigendian(in + 112);
-    uint64 w15 = REF10_load_bigendian(in + 120);
+    REF10_uint64 w0  = REF10_load_bigendian(in +   0);
+    REF10_uint64 w1  = REF10_load_bigendian(in +   8);
+    REF10_uint64 w2  = REF10_load_bigendian(in +  16);
+    REF10_uint64 w3  = REF10_load_bigendian(in +  24);
+    REF10_uint64 w4  = REF10_load_bigendian(in +  32);
+    REF10_uint64 w5  = REF10_load_bigendian(in +  40);
+    REF10_uint64 w6  = REF10_load_bigendian(in +  48);
+    REF10_uint64 w7  = REF10_load_bigendian(in +  56);
+    REF10_uint64 w8  = REF10_load_bigendian(in +  64);
+    REF10_uint64 w9  = REF10_load_bigendian(in +  72);
+    REF10_uint64 w10 = REF10_load_bigendian(in +  80);
+    REF10_uint64 w11 = REF10_load_bigendian(in +  88);
+    REF10_uint64 w12 = REF10_load_bigendian(in +  96);
+    REF10_uint64 w13 = REF10_load_bigendian(in + 104);
+    REF10_uint64 w14 = REF10_load_bigendian(in + 112);
+    REF10_uint64 w15 = REF10_load_bigendian(in + 120);
 
     REF10_F(w0 ,0x428a2f98d728ae22ULL)
     REF10_F(w1 ,0x7137449123ef65cdULL)

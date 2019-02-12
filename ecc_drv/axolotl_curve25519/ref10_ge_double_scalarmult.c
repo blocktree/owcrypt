@@ -1,6 +1,7 @@
 #include "ref10_ge.h"
+#include "ref10_base2.h"
 
-static void slide(signed char *r,const unsigned char *a)
+static void REF10_slide(signed char *r,const unsigned char *a)
 {
   int i;
   int b;
@@ -32,9 +33,9 @@ static void slide(signed char *r,const unsigned char *a)
 
 }
 
-static REF10_ge_precomp Bi[8] = {
-#include "ref10_base2.h"
-} ;
+//static REF10_ge_precomp REF10_Bi[8] = {
+//#include "ref10_base2.h"
+//} ;
 
 /*
 r = a * A + b * B
@@ -53,8 +54,8 @@ void REF10_ge_double_scalarmult_vartime(REF10_ge_p2 *r,const unsigned char *a,co
   REF10_ge_p3 A2;
   int i;
 
-  slide(aslide,a);
-  slide(bslide,b);
+  REF10_slide(aslide,a);
+  REF10_slide(bslide,b);
 
   REF10_ge_p3_to_cached(&Ai[0],A);
   REF10_ge_p3_dbl(&t,A); REF10_ge_p1p1_to_p3(&A2,&t);
@@ -85,10 +86,10 @@ void REF10_ge_double_scalarmult_vartime(REF10_ge_p2 *r,const unsigned char *a,co
 
     if (bslide[i] > 0) {
       REF10_ge_p1p1_to_p3(&u,&t);
-      REF10_ge_madd(&t,&u,&Bi[bslide[i]/2]);
+      REF10_ge_madd(&t,&u,&REF10_Bi[bslide[i]/2]);
     } else if (bslide[i] < 0) {
       REF10_ge_p1p1_to_p3(&u,&t);
-      REF10_ge_msub(&t,&u,&Bi[(-bslide[i])/2]);
+      REF10_ge_msub(&t,&u,&REF10_Bi[(-bslide[i])/2]);
     }
 
     REF10_ge_p1p1_to_p2(r,&t);

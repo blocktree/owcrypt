@@ -18,11 +18,11 @@ Preconditions:
  *
  * */
 
-static const unsigned char zero[32];
+static const unsigned char REF10_zero[32];
 
 int REF10_fe_isnonzero(const REF10_fe f)
 {
   unsigned char s[32];
   REF10_fe_tobytes(s,f);
-  return REF10_crypto_verify_32(s,zero);
+  return REF10_crypto_verify_32(s,REF10_zero);
 }

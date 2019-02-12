@@ -1,5 +1,6 @@
 #include "ref10_ge.h"
 #include "ref10_crypto_uint32.h"
+#include "ref10_base.h"
 
 static unsigned char REF10_equal(signed char b,signed char c)
 {
@@ -27,9 +28,9 @@ static void REF10_cmov(REF10_ge_precomp *t,REF10_ge_precomp *u,unsigned char b)
 }
 
 /* base[i][j] = (j+1)*256^i*B */
-static REF10_ge_precomp base[32][8] = {
-#include "ref10_base.h"
-} ;
+//static REF10_ge_precomp base[32][8] = {
+//#include "ref10_base.h"
+//} ;
 
 static void REF10_select(REF10_ge_precomp *t,int pos,signed char b)
 {

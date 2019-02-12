@@ -3,7 +3,7 @@
 #include "ref10_crypto_uint32.h"
 #include "ref10_crypto_uint64.h"
 
-static REF10_crypto_uint64 REF10_load_3(const unsigned char *in)
+static REF10_crypto_uint64 REF10_sc_muladd_load_3(const unsigned char *in)
 {
   REF10_crypto_uint64 result;
   result = (REF10_crypto_uint64) in[0];
@@ -12,7 +12,7 @@ static REF10_crypto_uint64 REF10_load_3(const unsigned char *in)
   return result;
 }
 
-static REF10_crypto_uint64 REF10_load_4(const unsigned char *in)
+static REF10_crypto_uint64 REF10_sc_muladd_load_4(const unsigned char *in)
 {
   REF10_crypto_uint64 result;
   result = (REF10_crypto_uint64) in[0];
@@ -35,42 +35,42 @@ Output:
 
 void REF10_sc_muladd(unsigned char *s,const unsigned char *a,const unsigned char *b,const unsigned char *c)
 {
-  REF10_crypto_int64 a0 = 2097151 & REF10_load_3(a);
-  REF10_crypto_int64 a1 = 2097151 & (REF10_load_4(a + 2) >> 5);
-  REF10_crypto_int64 a2 = 2097151 & (REF10_load_3(a + 5) >> 2);
-  REF10_crypto_int64 a3 = 2097151 & (REF10_load_4(a + 7) >> 7);
-  REF10_crypto_int64 a4 = 2097151 & (REF10_load_4(a + 10) >> 4);
-  REF10_crypto_int64 a5 = 2097151 & (REF10_load_3(a + 13) >> 1);
-  REF10_crypto_int64 a6 = 2097151 & (REF10_load_4(a + 15) >> 6);
-  REF10_crypto_int64 a7 = 2097151 & (REF10_load_3(a + 18) >> 3);
-  REF10_crypto_int64 a8 = 2097151 & REF10_load_3(a + 21);
-  REF10_crypto_int64 a9 = 2097151 & (REF10_load_4(a + 23) >> 5);
-  REF10_crypto_int64 a10 = 2097151 & (REF10_load_3(a + 26) >> 2);
-  REF10_crypto_int64 a11 = (REF10_load_4(a + 28) >> 7);
-  REF10_crypto_int64 b0 = 2097151 & REF10_load_3(b);
-  REF10_crypto_int64 b1 = 2097151 & (REF10_load_4(b + 2) >> 5);
-  REF10_crypto_int64 b2 = 2097151 & (REF10_load_3(b + 5) >> 2);
-  REF10_crypto_int64 b3 = 2097151 & (REF10_load_4(b + 7) >> 7);
-  REF10_crypto_int64 b4 = 2097151 & (REF10_load_4(b + 10) >> 4);
-  REF10_crypto_int64 b5 = 2097151 & (REF10_load_3(b + 13) >> 1);
-  REF10_crypto_int64 b6 = 2097151 & (REF10_load_4(b + 15) >> 6);
-  REF10_crypto_int64 b7 = 2097151 & (REF10_load_3(b + 18) >> 3);
-  REF10_crypto_int64 b8 = 2097151 & REF10_load_3(b + 21);
-  REF10_crypto_int64 b9 = 2097151 & (REF10_load_4(b + 23) >> 5);
-  REF10_crypto_int64 b10 = 2097151 & (REF10_load_3(b + 26) >> 2);
-  REF10_crypto_int64 b11 = (REF10_load_4(b + 28) >> 7);
-  REF10_crypto_int64 c0 = 2097151 & REF10_load_3(c);
-  REF10_crypto_int64 c1 = 2097151 & (REF10_load_4(c + 2) >> 5);
-  REF10_crypto_int64 c2 = 2097151 & (REF10_load_3(c + 5) >> 2);
-  REF10_crypto_int64 c3 = 2097151 & (REF10_load_4(c + 7) >> 7);
-  REF10_crypto_int64 c4 = 2097151 & (REF10_load_4(c + 10) >> 4);
-  REF10_crypto_int64 c5 = 2097151 & (REF10_load_3(c + 13) >> 1);
-  REF10_crypto_int64 c6 = 2097151 & (REF10_load_4(c + 15) >> 6);
-  REF10_crypto_int64 c7 = 2097151 & (REF10_load_3(c + 18) >> 3);
-  REF10_crypto_int64 c8 = 2097151 & REF10_load_3(c + 21);
-  REF10_crypto_int64 c9 = 2097151 & (REF10_load_4(c + 23) >> 5);
-  REF10_crypto_int64 c10 = 2097151 & (REF10_load_3(c + 26) >> 2);
-  REF10_crypto_int64 c11 = (REF10_load_4(c + 28) >> 7);
+  REF10_crypto_int64 a0 = 2097151 & REF10_sc_muladd_load_3(a);
+  REF10_crypto_int64 a1 = 2097151 & (REF10_sc_muladd_load_4(a + 2) >> 5);
+  REF10_crypto_int64 a2 = 2097151 & (REF10_sc_muladd_load_3(a + 5) >> 2);
+  REF10_crypto_int64 a3 = 2097151 & (REF10_sc_muladd_load_4(a + 7) >> 7);
+  REF10_crypto_int64 a4 = 2097151 & (REF10_sc_muladd_load_4(a + 10) >> 4);
+  REF10_crypto_int64 a5 = 2097151 & (REF10_sc_muladd_load_3(a + 13) >> 1);
+  REF10_crypto_int64 a6 = 2097151 & (REF10_sc_muladd_load_4(a + 15) >> 6);
+  REF10_crypto_int64 a7 = 2097151 & (REF10_sc_muladd_load_3(a + 18) >> 3);
+  REF10_crypto_int64 a8 = 2097151 & REF10_sc_muladd_load_3(a + 21);
+  REF10_crypto_int64 a9 = 2097151 & (REF10_sc_muladd_load_4(a + 23) >> 5);
+  REF10_crypto_int64 a10 = 2097151 & (REF10_sc_muladd_load_3(a + 26) >> 2);
+  REF10_crypto_int64 a11 = (REF10_sc_muladd_load_4(a + 28) >> 7);
+  REF10_crypto_int64 b0 = 2097151 & REF10_sc_muladd_load_3(b);
+  REF10_crypto_int64 b1 = 2097151 & (REF10_sc_muladd_load_4(b + 2) >> 5);
+  REF10_crypto_int64 b2 = 2097151 & (REF10_sc_muladd_load_3(b + 5) >> 2);
+  REF10_crypto_int64 b3 = 2097151 & (REF10_sc_muladd_load_4(b + 7) >> 7);
+  REF10_crypto_int64 b4 = 2097151 & (REF10_sc_muladd_load_4(b + 10) >> 4);
+  REF10_crypto_int64 b5 = 2097151 & (REF10_sc_muladd_load_3(b + 13) >> 1);
+  REF10_crypto_int64 b6 = 2097151 & (REF10_sc_muladd_load_4(b + 15) >> 6);
+  REF10_crypto_int64 b7 = 2097151 & (REF10_sc_muladd_load_3(b + 18) >> 3);
+  REF10_crypto_int64 b8 = 2097151 & REF10_sc_muladd_load_3(b + 21);
+  REF10_crypto_int64 b9 = 2097151 & (REF10_sc_muladd_load_4(b + 23) >> 5);
+  REF10_crypto_int64 b10 = 2097151 & (REF10_sc_muladd_load_3(b + 26) >> 2);
+  REF10_crypto_int64 b11 = (REF10_sc_muladd_load_4(b + 28) >> 7);
+  REF10_crypto_int64 c0 = 2097151 & REF10_sc_muladd_load_3(c);
+  REF10_crypto_int64 c1 = 2097151 & (REF10_sc_muladd_load_4(c + 2) >> 5);
+  REF10_crypto_int64 c2 = 2097151 & (REF10_sc_muladd_load_3(c + 5) >> 2);
+  REF10_crypto_int64 c3 = 2097151 & (REF10_sc_muladd_load_4(c + 7) >> 7);
+  REF10_crypto_int64 c4 = 2097151 & (REF10_sc_muladd_load_4(c + 10) >> 4);
+  REF10_crypto_int64 c5 = 2097151 & (REF10_sc_muladd_load_3(c + 13) >> 1);
+  REF10_crypto_int64 c6 = 2097151 & (REF10_sc_muladd_load_4(c + 15) >> 6);
+  REF10_crypto_int64 c7 = 2097151 & (REF10_sc_muladd_load_3(c + 18) >> 3);
+  REF10_crypto_int64 c8 = 2097151 & REF10_sc_muladd_load_3(c + 21);
+  REF10_crypto_int64 c9 = 2097151 & (REF10_sc_muladd_load_4(c + 23) >> 5);
+  REF10_crypto_int64 c10 = 2097151 & (REF10_sc_muladd_load_3(c + 26) >> 2);
+  REF10_crypto_int64 c11 = (REF10_sc_muladd_load_4(c + 28) >> 7);
   REF10_crypto_int64 s0;
   REF10_crypto_int64 s1;
   REF10_crypto_int64 s2;
