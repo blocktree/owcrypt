@@ -18,7 +18,7 @@
 #include "secp256r1.h"
 #include "sm2.h"
 #include "ED25519.h"
-#include "REF10_ge.h"
+#include "ref10_ge.h"
 #include "ref10_keygen.h"
 #include "ref10_crypto_sign.h"
 
