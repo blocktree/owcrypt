@@ -15,6 +15,7 @@ int REF10_fe_isequal(const REF10_fe f, const REF10_fe g);
 int REF10_fe_isreduced(const unsigned char* s);
 void REF10_fe_mont_rhs(REF10_fe v2, const REF10_fe u);
 void REF10_fe_montx_to_edy(REF10_fe y, const REF10_fe u);
+void REF10_fe_montx_from_edy(REF10_fe u, const REF10_fe y);
 void REF10_fe_sqrt(REF10_fe b, const REF10_fe a);
 
 int REF10_ge_isneutral(const REF10_ge_p3* q);
