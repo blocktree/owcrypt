@@ -733,3 +733,22 @@ uint16_ow ECC_recover_pubkey(uint8_ow *sig,uint32_ow sig_len,uint8_ow *msg,uint3
     return ret;
 }
 
+
+
+/*
+ @functions: convert between x25519 point and ed25519 point
+ */
+#include "ref10_gen_x.h"
+uint16_ow CURVE25519_convert_X_to_Ed(uint8_ow *ed, uint8_ow *x)
+{
+    if(REF10_convert_X_to_Ed(ed, x) != 0)
+        return FAILURE;
+    return SUCCESS;
+}
+
+uint16_ow CURVE25519_convert_Ed_to_X(uint8_ow *x, uint8_ow *ed)
+{
+    if(REF10_convert_Ed_to_X(x, ed) != 0)
+        return FAILURE;
+    return SUCCESS;
+}

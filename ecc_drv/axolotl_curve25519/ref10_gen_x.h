@@ -34,4 +34,9 @@ int REF10_generalized_xveddsa_25519_verify(
                   const unsigned char* customization_label,
                   const unsigned long customization_label_len);
 
+int REF10_convert_X_to_Ed(unsigned char* ed, const unsigned char* x);
+
+int REF10_convert_Ed_to_X(unsigned char* x, const unsigned char* ed);
+
+
 #endif

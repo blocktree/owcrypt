@@ -25,6 +25,23 @@ static int REF10_convert_25519_pubkey(unsigned char* ed_pubkey_bytes, const unsi
   return 0;
 }
 
+int REF10_convert_X_to_Ed(unsigned char* ed, const unsigned char* x)
+{
+    return REF10_convert_25519_pubkey(ed, x);
+}
+
+int REF10_convert_Ed_to_X(unsigned char* x, const unsigned char* ed)
+{
+    REF10_fe u;
+    REF10_fe y;
+    REF10_fe_frombytes(y, ed);
+    REF10_fe_montx_from_edy(u, y);
+    REF10_fe_tobytes(x, u);
+    if (!REF10_fe_isreduced(x))
+        return -1;
+    return 0;
+}
+
 static int REF10_calculate_25519_keypair(unsigned char* K_bytes, unsigned char* k_scalar, 
                             const unsigned char* x25519_privkey_scalar)
 {

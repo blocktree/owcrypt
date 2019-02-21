@@ -161,4 +161,11 @@ uint16_ow ECC_get_curve_order(uint8_ow *order, uint32_ow type);
  */
 uint16_ow ECC_recover_pubkey(uint8_ow *sig,uint32_ow sig_len,uint8_ow *msg,uint32_ow msg_len,uint8_ow *pubkey,uint32_ow type);
 
+
+/*
+ @functions: convert between x25519 point and ed25519 point
+ */
+uint16_ow CURVE25519_convert_X_to_Ed(uint8_ow *ed, uint8_ow *x);
+uint16_ow CURVE25519_convert_Ed_to_X(uint8_ow *x, uint8_ow *ed);
+
 #endif /* ecc_set_h */
