@@ -87,6 +87,21 @@ uint16_ow ECC_key_exchange_responder_step1(uint8_ow *IDinitiator,         \
                                           uint16_ow keylen,              \
                                           uint8_ow *key,                 \
                                           uint32_ow type);
+uint16_ow ECC_key_exchange_responder_ElGamal_step1(uint8_ow *IDinitiator,         \
+                                           uint16_ow IDinitiator_len,     \
+                                           uint8_ow *IDresponder,         \
+                                           uint16_ow IDresponder_len,     \
+                                           uint8_ow *priResponder,        \
+                                           uint8_ow *pubResponder,        \
+                                           uint8_ow *pubInitiator,        \
+                                           uint8_ow *tmpPubResponder,     \
+                                           uint8_ow *tmpPubInitiator,     \
+                                           uint8_ow *Sin,                 \
+                                           uint8_ow *Sout,                \
+                                           uint16_ow keylen,              \
+                                           uint8_ow *key,                 \
+                                           uint8_ow *random,              \
+                                           uint32_ow type);
 uint16_ow ECC_key_exchange_responder_step2(uint8_ow *Sinitiator, uint8_ow *Sresponder, uint32_ow type);
 /*
  @function:(Point)outpoint_buf = (Point)inputpoint1_buf+[k](Point)inputpoint2_buf

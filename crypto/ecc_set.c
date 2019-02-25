@@ -445,7 +445,42 @@ uint16_ow ECC_key_exchange_responder_step1(uint8_ow *IDinitiator,         \
     {
         case ECC_CURVE_SM2_STANDARD:
         {
-            ret = sm2_std_ka_responder_step1(IDinitiator, IDinitiator_len, IDresponder, IDresponder_len, priResponder, pubResponder, pubInitiator, tmpPubResponder, tmpPubInitiator, Sin, Sout, keylen, key);
+            ret = sm2_std_ka_responder_step1(IDinitiator, IDinitiator_len, IDresponder, IDresponder_len, priResponder, pubResponder, pubInitiator, tmpPubResponder, tmpPubInitiator, Sin, Sout, keylen, key, 0, 0);
+        }
+            break;
+        default:
+        {
+            ret = ECC_WRONG_TYPE;
+        }
+            break;
+    }
+    
+    return ret;
+}
+
+uint16_ow ECC_key_exchange_responder_ElGamal_step1(uint8_ow *IDinitiator,     \
+                                               uint16_ow IDinitiator_len,     \
+                                               uint8_ow *IDresponder,         \
+                                               uint16_ow IDresponder_len,     \
+                                               uint8_ow *priResponder,        \
+                                               uint8_ow *pubResponder,        \
+                                               uint8_ow *pubInitiator,        \
+                                               uint8_ow *tmpPubResponder,     \
+                                               uint8_ow *tmpPubInitiator,     \
+                                               uint8_ow *Sin,                 \
+                                               uint8_ow *Sout,                \
+                                               uint16_ow keylen,              \
+                                               uint8_ow *key,                 \
+                                               uint8_ow *random,              \
+                                               uint32_ow type)
+{
+    uint16_ow ret = 0;
+    
+    switch (type)
+    {
+        case ECC_CURVE_SM2_STANDARD:
+        {
+            ret = sm2_std_ka_responder_step1(IDinitiator, IDinitiator_len, IDresponder, IDresponder_len, priResponder, pubResponder, pubInitiator, tmpPubResponder, tmpPubInitiator, Sin, Sout, keylen, key, random, 1);
         }
             break;
         default:
