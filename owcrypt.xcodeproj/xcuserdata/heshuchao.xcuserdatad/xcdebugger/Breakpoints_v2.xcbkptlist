@@ -1,37 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "B2249C61-6565-456C-854F-0C3F95272716"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "E5BCC022-A05E-44E4-B367-BB774C9F529B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "test/main.c"
-            timestampString = "571656327.527855"
+            filePath = "ecc_drv/secp256k1.c"
+            timestampString = "584594026.450564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "main"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "secp256k1_sign()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "F406A4FF-3F35-4465-A2ED-DCE6DB4082E0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ecc_drv/ECDSA.c"
+            timestampString = "583985005.233693"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "ECDSA_sign()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3B245109-CB79-41F0-BE43-1E38F26DB10B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ecc_drv/CURVE25519.c"
+            timestampString = "586253348.141539"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3659"
+            endingLineNumber = "3659"
+            landmarkName = "CURVE25519_Sign(prikey, message, message_len, sig, type)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "706FB2EF-7110-4B01-A3A6-D1D4F1E0C73C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test/main.c"
-            timestampString = "571656327.52816"
+            timestampString = "586942134.206624"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "main"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "main()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
